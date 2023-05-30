@@ -1,0 +1,84 @@
+# Simple 2048 Using Map and Zip
+# By LakshEditings    linkedin.com/in/v-lakshen-b1103a213/
+
+import random
+
+grid = [[0] * 3 for _ in range(3)]
+
+def add():
+    empty_cells = [(i, j) for i in range(3) for j in range(3) if grid[i][j] == 0]
+    if empty_cells:
+        row, col = random.choice(empty_cells)
+        grid[row][col] = random.choice([2, 4])
+
+def print_grid():
+    for row in grid:
+        print(*row, sep='\t')
+    print()
+
+def move_left():
+    for row in grid:
+        merged = []
+        prev = 0
+        for cell in row:
+            if cell != 0:
+                if cell == prev:
+                    merged.append(cell * 2)
+                    prev = 0
+                else:
+                    if prev != 0:
+                        merged.append(prev)
+                    prev = cell
+        if prev != 0:
+            merged.append(prev)
+        row[:len(merged)] = merged
+        row[len(merged):] = [0] * (3 - len(merged))
+
+def over():
+    for row in grid:
+        if 0 in row:
+            return False
+        for i in range(3):
+            if row[i] == row[i + 1]:
+                return False
+    return True
+
+def won():
+    for row in grid:
+        if 2048 in row:
+            return True
+    return False
+
+add ()
+add ()
+print_grid()
+
+while True:
+    direction = input("Enter Move (left/right/up/down): ").lower()
+    
+    if direction == "left":
+        move_left()
+    # Using  Left Function  With Alteration
+    elif direction == "right":
+        grid = [row[::-1] for row in grid]
+        move_left()
+        grid = [row[::-1] for row in grid]
+    elif direction == "up":
+        grid = list(map(list, zip(*grid[::1])))
+        move_left()
+        grid = list(map(list, zip(*grid[::1])))
+    elif direction == "down":
+        grid = list(map(list, zip(*grid)))[::1]
+        move_left()
+        grid = list(map(list, zip(*grid)))[::-1]
+    
+    if won():
+        print("Congratulations!")
+        break
+    
+    if over():
+        print("Game Over!")
+        break
+    
+    add ()
+    print_grid()
