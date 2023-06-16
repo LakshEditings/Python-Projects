@@ -1,0 +1,30 @@
+# Infix To Postfix Converting Using Simple Algorithm
+# By LakshEditings    linkedin.com/in/v-lakshen-b1103a213/
+
+def convo(expression):
+    precedence = {"+": 1, "-": 1, "*": 2, "/": 2, "^": 3}
+    stack = []
+    postfix = []
+
+    for i in expression:
+        if i.isalnum():
+            postfix.append(i)
+        elif (i == "("):
+            stack.append(i)
+        elif (i == ")"):
+            while stack[-1] != "(":
+                postfix.append(stack.pop())
+            stack.pop() #Removing ( From The STACK
+        elif i in precedence:
+            while stack and stack[-1] != "(" and precedence[i] <= precedence.get(stack[-1], 0):
+                postfix.append(stack.pop())
+            stack.append(i)
+
+    postfix = postfix + stack[::-1] #Appending Leftover Operators From STACK
+    return "".join(postfix) #Put A Space To Get The Expression Clearly
+
+eqn = "( ( A - B ) * ( D / E ) ) / ( F * G * H )"
+exprsn = convo(eqn)
+print("Infix Expression:", eqn)
+print("Postfix Expression:", exprsn)
+
