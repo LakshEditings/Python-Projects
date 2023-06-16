@@ -2,7 +2,6 @@
 # By LakshEditings    linkedin.com/in/v-lakshen-b1103a213/
 # 20 Minutes
 
-
 # Enter The Sudoku (Nested List Format)
 given = [
     [0, 2, 4, 3, 8, 0, 0, 0, 0],
