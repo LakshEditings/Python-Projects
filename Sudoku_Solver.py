@@ -1,5 +1,7 @@
 # Sudoku Solver Using Simple BackTracing Algorithm
 # By LakshEditings    linkedin.com/in/v-lakshen-b1103a213/
+# 20 Minutes
+
 
 # Enter The Sudoku (Nested List Format)
 given = [
