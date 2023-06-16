@@ -1,5 +1,6 @@
 # Infix To Postfix Converting Using Simple Algorithm
 # By LakshEditings    linkedin.com/in/v-lakshen-b1103a213/
+# 30 Minutes
 
 def convo(expression):
     precedence = {"+": 1, "-": 1, "*": 2, "/": 2, "^": 3}
